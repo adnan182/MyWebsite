@@ -559,7 +559,7 @@
                     <!-- Heading  End-->
                     <tr>
                         <td align="center" valign="top">
-                            <table border="0" width="55%" cellpadding="20" cellspacing="0" align="center" bgcolor="#8b6d6d">
+                            <table border="0" id="contactForm" width="55%" cellpadding="20" cellspacing="0" align="center" bgcolor="#8b6d6d">
                                 <tr>
                                     <td>
                                         <table border="0" width="100%" cellpadding="15" cellspacing="0" align="center" bgcolor="#db7878#000000">
@@ -582,7 +582,12 @@
 
                                                 </td>
                                                 <td width="70%">
-                                                    <input type="mail" placeholder="Enter Your Email Address" size="50">
+                                                    <input type="mail" id="emailField" placeholder="Enter Your Email Address" size="50">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <span id="emailError" style="color: red;"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -794,6 +799,25 @@
     <font color="white" align="right">Copyright © 2021 Love2Create. All Rights Reserved to MD.ADNAN HOSSAIN</font>
 
     <!-- End Footer -->
+<script>
+  const contactForm = document.getElementById('contactForm');
+  const emailField = document.getElementById('emailField');
+  const emailError = document.getElementById('emailError');
+
+  if (contactForm && emailField && emailError) {
+    contactForm.addEventListener('submit', function(event) {
+      const emailValue = emailField.value;
+      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      if (!emailRegex.test(emailValue)) {
+        event.preventDefault();
+        emailError.textContent = "Invalid email format.";
+      } else {
+        emailError.textContent = "";
+      }
+    });
+  }
+</script>
 </body>
 
 </html>
